@@ -1,0 +1,243 @@
+<app-leave-sub-header></app-leave-sub-header> 
+<div style="margin-left: 5%; margin: top 2%;">
+    <h1><b>Holiday</b></h1>
+  </div>
+  
+  <div *ngIf="showTabs" class="modal-overlay" >
+    <div class="modal-dialog" (click)="preventClose($event)">
+      <form class="modal-content"style="height: 100%;  ">
+     <form [formGroup]="validationForm" (ngSubmit)="onSubmit()" style="width: 90%;">
+          <button mat-icon-button (click)="toggleTabs()" class="close-icon">
+            <i class="far fa-times-circle"></i>
+          </button>
+          <h1><b>Add Holiday</b></h1>
+          <div class="main">
+          <div class="row">
+            <div class="col mb-4">
+              <mdb-form-control>
+                <select
+                  mdbValidate
+                  [required]="true"
+                  formControlName="select"
+                  mdbInput
+                  id="form8Example4"
+                  class="form-control"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <option value disabled selected hidden></option>
+                  <option value="option1">National</option>
+                  <option value="option2">Manual</option>
+                </select>
+                <label mdbLabel class="form-label" for="form8Example4"
+                  >Holiday type<span class="text-danger">*</span></label
+                >
+                <i
+                  class="fas fa-caret-down"
+                  style="
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 10px;
+                  "
+                ></i>
+              </mdb-form-control>
+            </div>
+            <div class="col mb-4">
+                <mdb-form-control>
+                  <input
+                    mdbValidate
+                    mdbInput
+                    type="text"
+                    id="form1"
+                    class="form-control"
+                    formControlName="input"
+                    required
+                  />
+                  <label mdbLabel class="form-label" for="form1"
+                    >Enter Name<span class="text-danger">*</span></label
+                  >
+               </mdb-form-control>
+              </div>
+           </div>
+           <div class="row">
+            <div class="col mb-4">
+                <mdb-form-control>
+                  <input
+                    mdbValidate
+                    mdbInput
+                    type="date"
+                    id="form1"
+                    class="form-control"
+                    formControlName="input1"
+                    required
+                  />
+                  <label mdbLabel class="form-label" for="form1"
+                    >From<span class="text-danger">*</span></label
+                  >
+               </mdb-form-control>
+              </div>
+              <div class="col mb-4">
+                <mdb-form-control>
+                  <input
+                    mdbValidate
+                    mdbInput
+                    type="date"
+                    id="form1"
+                    class="form-control"
+                    formControlName="input2"
+                    required
+                  />
+                  <label mdbLabel class="form-label" for="form1"
+                    >To<span class="text-danger">*</span></label
+                  >
+               </mdb-form-control>
+              </div>
+           </div>
+           <div class="row">
+            <div class="col">
+              <mdb-form-control>
+                <textarea
+                  mdbValidate
+                  mdbInput
+                  type="text"
+                  id="form1"
+                  class="form-control"
+                  formControlName="textarea"
+                  required
+                ></textarea>
+                <label mdbLabel class="form-label" for="form1"
+                  >Description<span>*</span></label
+                >
+                
+              </mdb-form-control>
+            </div>
+           </div>
+          <br />
+          <span class="text-danger">*</span> Required
+          <div
+            class="col-md-5 offset-md-4"
+            matTooltip="Submit"
+            style="margin-left: 45%"
+          >
+            <button  type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        </form> 
+            
+          </form>
+    </div>
+  </div>
+  <div style="overflow: scroll; position: relative; height: 500px">
+    <div
+      class="card"
+      style="
+        border: 1px solid lightgray;
+        margin: 15px 14px;
+        border-radius: 10px;
+        overflow: scroll;
+        height: 450px;
+  
+      "
+    >
+      <table
+        class="table align-middle mb-0 bg-white table-bordered"
+        style="position: relative"
+      >
+        <thead class="bg-light" style="position: sticky; top: 0px; z-index: 1">
+          <tr>
+           
+            <th>Id <i class="fa fa-arrow-up" aria-hidden="true"></i></th>
+            <th>Holiday Type</th>
+            <th>Holiday Name<i class="fa fa-arrow-up" aria-hidden="true"></i></th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Holiday</th>
+            <th>Created By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <div
+          class="round-button"
+          style="position: fixed; top: 140px; right: 9px; width: 50px; z-index: 1"
+        >
+          <button
+            mat-fab
+            extended
+            (click)="toggleTabs()"
+            matTooltip="Add Holiday"
+            aria-label="Button that displays a tooltip in various positions"
+            color="warn"
+          >
+            <i
+              class="fas fa-plus fa-2x"
+              style="color: rgba(10, 253, 253, 0.773)"
+            ></i>
+          </button>
+        </div>
+        <tbody>
+          <tr *ngFor="let m of HolidayList">
+            <td>{{ m.Id }}</td>
+            <td>{{ m.holidaytype }}</td>
+            <td>{{ m.holidayName }}</td>
+            <td>{{ m.from }}</td>
+            <td>{{ m.to }}</td>
+            <td>{{ m.total }}</td>
+            <td>{{ m.createdBy }}</td>
+            
+            <td>
+              <span style="text-decoration: none">
+                <div mdbDropdown class="dropdown dropx">
+                  <a
+                    role="button"
+                    id="dropdownMenuLink"
+                    mdbDropdownToggle
+                    style="
+                      width: 4px;
+                      height: 10px;
+                      color: black;
+                      border-radius: 0px;
+                      padding: 0px 30px;
+                    "
+                  >
+                    <i
+                      class="fas fa-ellipsis-v fa-1.8x ico"
+                      style="
+                        margin-bottom: 0px;
+                        margin-left: 0px;
+                        margin-right: 20px;
+                      "
+                      id="icox"
+                    ></i>
+                  </a>
+                  <ul
+                    mdbDropdownMenu
+                    class="dropdown-menu"
+                    style="margin-left: 30px"
+                  >
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    
+                      <li>
+                      <a class="dropdown-item"
+                        ><i class="fa-solid fa-pen-to-square"></i>
+                        Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item"
+                        ><i class="fas fa-trash"></i> Delete</a
+                      >
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                  </ul>
+                </div>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+</div>

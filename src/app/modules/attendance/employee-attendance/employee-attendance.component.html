@@ -1,0 +1,173 @@
+<app-attendance-sub-header></app-attendance-sub-header>
+<div class="modal-body">
+  <div class="menu">
+    <div class="timesheet row-2">
+      <h4>Date : {{ formatDate(manualattendList[0].date) }}</h4>
+      <!-- Show only the last punch in -->
+      <ng-container *ngFor="let attendance of manualattendList">
+        <div class="punch" *ngIf="isFirstPunchIn(attendance)">
+          <p>
+            <b>punch in at</b> <br />
+            {{ attendance.time }}
+          </p>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let attendance of manualattendList" (click)="selectUser(attendance.empRegId)">
+        <div class="time" *ngIf="isLastPunchOut(attendance)">
+          
+          <p>{{ calculateTimeDifference(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) }}</p>
+        </div>
+      </ng-container>
+      
+      
+      
+      <!-- Show only the last punch out -->
+      <ng-container *ngFor="let attendance of manualattendList">
+        <div class="punch" *ngIf="isLastPunchOut(attendance)">
+          <p>
+            <b>punch out at</b> <br />
+            {{ attendance.time }}
+          </p>
+        </div>
+      </ng-container>
+  
+      <div class="break-ov">
+        <div class="break">
+          <p>
+            <b>Break</b> <br />
+            1.21 hrs
+          </p>
+        </div>
+        <div class="overtime">
+          <p>
+            <b>Overtime </b><br />
+            3 hrs
+          </p>
+        </div>
+      </div>
+    </div>
+  
+      <div class="statistics row-3">
+  <h4>Statistics</h4>
+  <ng-container *ngFor="let attendance of manualattendList">
+    <!-- Check if there is a valid punch in and punch out time for the current employee -->
+    <ng-container *ngIf="getLatestPunchIn(attendance.empRegId) && getLatestPunchOut(attendance.empRegId)">
+      <div class="stat-info">
+        <p>
+          Today <strong>{{ calculateTimeDifference(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) }} <strong> / 8h:00m</strong></strong>
+        </p>
+        <div class="progress">
+          <!-- Calculate the percentage based on the time difference -->
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            [style.width.%]="calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time)"
+            [ngClass]="{
+              'bg-danger': calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) < 25,
+              'bg-primary': calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) >= 25 && calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) < 50,
+              'bg-warning': calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) >= 50 && calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) < 75,
+              'bg-success': calculatePercentage(getLatestPunchIn(attendance.empRegId).time, getLatestPunchOut(attendance.empRegId).time) >= 75
+            }"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+        
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+  
+      <div class="activity row-4">
+        <h4>Activity</h4>
+        <ul>
+          <ng-container *ngFor="let attendance of manualattendList" (click)="selectUser(attendance.empRegId)">
+            <li>
+              <p>
+                <b>Punch {{ attendance.type === 'Punch In' ? 'in' : 'out' }} at</b> ----- {{ attendance.time }}
+              </p>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- form -->
+    <form class="form1">
+      <!-- Date -->
+      <mdb-form-control class="mb-4">
+        <input mdbInput type="" id="form1Example1" class="form-control" />
+        <label mdbLabel class="form-label" for="form1Example2">Date</label>
+      </mdb-form-control>
+  
+      <!--Select Month -->
+      <mdb-form-control class="mb-4">
+        <select class="form-select" aria-label="Default select example">
+          <option selected mdbLabel class="form-label" for="form1Example2">
+            Select Month
+          </option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">Aprial</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">Octuber</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+      </mdb-form-control>
+  
+      <!-- Select Year -->
+      <mdb-form-control class="mb-4">
+        <select class="form-select" aria-label="Default select example">
+          <option selected mdbLabel class="form-label" for="form1Example2">
+            Select Year
+          </option>
+          <option value="1">2022</option>
+          <option value="2">2023</option>
+          <option value="3">2024</option>
+          <option value="4">2025</option>
+          <option value="5">2026</option>
+        </select>
+      </mdb-form-control>
+  
+      <!-- Search button -->
+      <button mdbRipple type="button" class="btn mb-4 btn-primary btn-block">
+        SEARCH
+      </button>
+    </form>
+  
+    <!-- table -->
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Punch In</th>
+            <th>punch Out</th>
+            <th>Production</th>
+            <th>Break</th>
+            <th>Overtime</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let m of AttendanceEmployee">
+            <td>{{ m.id }}</td>
+            <td>{{ m.date }}</td>
+            <td>{{ m.punch_in }}</td>
+            <td>{{ m.punch_out }}</td>
+            <td>{{ m.production }}</td>
+            <td>{{ m.break }}</td>
+            <td>{{ m.overtime }}</td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+  </div>

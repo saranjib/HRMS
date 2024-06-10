@@ -1,0 +1,81 @@
+<div class="full-container">
+    <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{isEdit ? 'Edit' : 'Add'}} Education</h2>
+        <button type="button" class="btn-close close-btn" aria-label="Close" (click)="modalRef.close()"></button>
+        <!-- <hr> -->
+    </div>
+    <div class="modal-body">
+        <form class="form-body">
+            <div class="input-row">
+                <mdb-form-control>
+                    <input mdbInput type="text" id="form1" [value]="formValues && formValues.level"
+                        class="form-control input-item" />
+                    <label mdbLabel class="form-label" for="form1">Level</label>
+                </mdb-form-control>
+                <mdb-form-control>
+                    <input mdbInput type="text" id="form1" [value]="formValues && formValues.institute"
+                        class="form-control input-item" />
+                    <label mdbLabel class="form-label" for="form1">Institute</label>
+                </mdb-form-control>
+            </div>
+            <div class="input-row">
+                <mdb-form-control>
+                    <input mdbInput type="text" id="form1" [value]="formValues && formValues.major"
+                        class="form-control input-item" />
+                    <label mdbLabel class="form-label" for="form1">Major/Specialization</label>
+                </mdb-form-control>
+                <div class="input-row">
+                    <mdb-form-control>
+                        <input mdbInput type="text" id="form1" [value]="formValues && formValues.year"
+                            class="form-control input-item" />
+                        <label mdbLabel class="form-label" for="form1">Year</label>
+                    </mdb-form-control>
+                    <mdb-form-control>
+                        <input mdbInput type="text" id="form1" [value]="formValues && formValues.score"
+                            class="form-control input-item" />
+                        <label mdbLabel class="form-label" for="form1">Score/GPA</label>
+                    </mdb-form-control>
+                </div>
+            </div>
+            <div class="input-row">
+                <mdb-form-control>
+                    <input mdbInput type="date" id="form1" [value]="formValues && formValues.startDate"
+                        class="form-control input-item" />
+                    <label mdbLabel class="form-label" for="form1">Start Date</label>
+                </mdb-form-control>
+                <mdb-form-control>
+                    <input mdbInput type="date" id="form1" [value]="formValues && formValues.endDate"
+                        class="form-control input-item" />
+                    <label mdbLabel class="form-label" for="form1">End Date</label>
+                </mdb-form-control>
+            </div>
+
+
+            <div class="input-row">
+                <mdb-form-control>
+                    <textarea mdbInput class="form-control" id="textAreaExample" rows="4"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Comment</label>
+                </mdb-form-control>
+
+                <div class="col upload-img" style="width: fit-content; margin-left: 1rem;">
+                    <div style="display: flex; flex-direction: column;  margin-bottom: 0.5rem;">
+                        <label mdbLabel for="document">Upload document</label>
+                        <input id="document" type="file" (change)="onFileSelected($event)" accept="image/*">
+                    </div>
+                    <div *ngIf="imageUrl" class="image-container">
+                        <img [src]="imageUrl" alt="Uploaded Image">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="divider">&nbsp;</div>
+            <div class="footer">
+                <button class="btn btn-rounded mx-2"
+                    style="border: 1px solid var(--orange-primary); color: var(--orange-primary);"
+                    (click)="modalRef.close()">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-rounded mx-2">Submit</button>
+            </div>
+        </form>
+ </div>
+</div>

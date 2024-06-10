@@ -1,0 +1,65 @@
+.container-fluid{
+  width: 98%;
+  height: 900px;
+  
+}
+
+th,td{
+  color: black;
+  
+
+}
+
+tr:nth-child(even){
+  background-color:rgb(245, 239, 239);
+}
+
+tr{
+  border:solid rgb(213, 209, 209);
+}
+.nav-tabs.nav-tabs-solid li a.active {
+  background-color: #ff9b44;
+  border-color: #ff9b44;
+  color: #fff;
+  border-radius: 0;
+}
+
+.card-body .dash-widget-info h3 {
+font-size: 30px;
+font-weight: 600;
+margin-bottom: 8px;
+
+}
+
+.dash-widget .card-body .dash-widget-info {
+text-align: right;
+width: calc(100% - 70px);
+}
+
+.card-body {
+flex: 1 1 auto;
+padding: 1rem;
+}
+
+
+#downloadbutton{
+background-color:#ff9b44;
+color: black;
+}
+
+#jobtype:hover{
+background-color: orange;
+
+}
+
+#actionbutton{
+color:black
+}
+
+.card {
+border: 1px solid #ededed;
+margin-bottom: 30px;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}

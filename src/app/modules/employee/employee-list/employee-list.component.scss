@@ -1,0 +1,125 @@
+.main{
+  max-width: 100%;
+  width: 1370px; 
+
+}
+
+.tablex {
+  margin: auto;
+  border-radius: 5px;
+  height: 430px !important; 
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+td{
+white-space: nowrap;
+}
+
+th{
+  background-color: #f9f4f4b8 !important;
+  border-radius: 5px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+.pagination{
+  background-color: #f9f4f4b8 !important;
+  width: 96%;
+  margin-left: 2%;
+  border-radius: 5px;
+}
+
+
+table{
+  border-radius: 50px !important;
+
+}
+
+.container-fluid {
+
+  width: 98%;
+  height: 100%;
+}
+.outerbox{
+  display: flex;
+  justify-content: space-between;
+}
+
+.outerbox{
+  width: 95%;
+}
+.heading {
+  text-align: left;
+}
+.head{
+  font-weight: bolder;
+  font-size: 5vh;
+}
+.button-links a {
+  margin-left: 10px;
+}
+.button-links {
+  text-align: right;
+}
+
+.icon-container {
+  display: flex;
+}
+.icon-square {
+  background-color: rgb(254, 254, 254);
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0px;
+ 
+  border-radius: 50% ;
+  background-color: var(--orange-primary);
+  color: white;
+}
+
+
+.icon-square i {
+  color: rgb(53, 49, 49); 
+  font-size: 20px;
+}
+@media only screen and (max-width: 650px) {
+ 
+  #input-field{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+  }
+  #input-field .col{
+    margin: 1vh;
+  }
+  #input-field #searchbtn{
+    width:87vw;
+  }
+  .outerbox{
+    width: 95%;
+  }
+   
+  } 
+
+  a {
+    text-decoration: none;
+    color: black !important;
+  }
+
+  a i {
+    font-size: 40px;
+  }
+
+  #searchbtn{
+    background-color: var(--orange-primary);
+    color: white;
+    width:16vw;
+    border-radius: 18px 18px 18px 18px;
+ }

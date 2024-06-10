@@ -1,0 +1,128 @@
+<app-master-sub-header></app-master-sub-header>
+<h1><b>manage Work shift</b></h1>
+
+<div style="overflow: scroll; ">
+  <div class="card"
+    style="border: 1px solid lightgray; margin: 15px 14px;border-radius: 10px; overflow: scroll; height:450px;">
+    <table class="table align-middle mb-0 bg-white" style="position: relative;">
+      <thead class="bg-light" style="position: sticky; top:0px">
+
+        <tr>
+          <th>
+            <span class="bi--three-dots" aria-hidden="true"></span>
+          </th>
+          <th>work shift<i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </th>
+          <th>from</th>
+          <th>To</th>
+          <th>Hours Per Day</th>
+          <th>
+
+        </tr>
+      </thead>
+      <div class="round-button" style="position: fixed; top:130px;right:10px; width:50px">
+        <button mat-fab extended (click)="toggleTabs()" matTooltip="add work shift"
+          aria-label="Button that displays a tooltip in various positions" color="warn">
+          <i class="fas fa-plus fa-2x" style="color: rgba(10, 253, 253, 0.773);"></i></button>
+      </div>
+
+      <tbody>
+        <tr *ngFor="let m of workshift">
+          <td>{{ m.id }}</td>
+          <td>{{m.name}}</td>
+          <td>{{ m.from}}</td>
+          <td>{{ m.to }}</td>
+          <td>{{ m.hours}}</td>
+          <th>
+            <span class="bi--pencil-fill" aria-hidden="true"></span>
+          </th>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- popup Holiday -->
+  <div *ngIf="showTabs" class="modal-overlay">
+    <div class="modal-dialog" (click)="preventClose($event)">
+      <div class="modal-content ">
+        <button mat-icon-button (click)="toggleTabs()" class="close-icon">
+          <i class="far fa-times-circle"></i>
+        </button>
+
+
+        <div class="container">
+
+
+          <div>
+            <h2>
+              Add manage-work-shifts
+            </h2>
+            <div>
+              <div class="container">
+                <div class="row g-8">
+                  <!-- First Column - Work Shift -->
+                  <div class="col-md-12">
+                    <mdb-form-control>
+                      <input mdbInput type="text" id="form1" class="form-control work-shift" />
+                      <label mdbLabel class="form-label" for="form">work shift<span class="text-danger">*</span></label>
+                    </mdb-form-control>
+
+                  </div>
+                </div>
+                <p></p>
+                <!-- Second Column - From, To, Hours Per Day -->
+
+
+                <!-- From -->
+
+                <div class="row">
+                  <!-- From -->
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <mdb-form-control>
+                        <input mdbInput type [ngxTimepicker]="startTimePicker" id="form1" class="form-control"
+                          [(ngModel)]="startTime" (ngModelChange)="calculateHoursPerDay()" required />
+                        <label mdbLabel class="form-label" for="form1">From<span class="text-danger">*</span></label>
+                        <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+                      </mdb-form-control>
+                    </div>
+                  </div>
+
+                  <!-- To -->
+
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <mdb-form-control>
+                        <input mdbInput type [ngxTimepicker]="endTimePicker" id="form2" class="form-control" required
+                          [(ngModel)]="endTime" (ngModelChange)="calculateHoursPerDay()" />
+                        <label mdbLabel class="form-label" for="form2">To<span class="text-danger">*</span></label>
+                        <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+                      </mdb-form-control>
+                    </div>
+                  </div>
+
+                  <!-- Hours Per Day -->
+
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <mdb-form-control>
+                        <input mdbInput type="text" [(ngModel)]="hoursPerDay" class="form-control" disabled />
+                        <label mdbLabel class="form-label" for="form9Example1">H & M<span
+                            class="text-danger">*</span></label>
+                      </mdb-form-control>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p></p>
+              <!-- Submit Button -->
+              <div class="row g-8">
+                <div class="col-md-5 offset-md-4">
+                  <div mat-dialog-actions [align]="'end'" class="submit-dialog">
+                    <button mdbRipple type="button" class="btn btn-info btn-sm" mat-dialog-close
+                      (click)="addworkshift()"><i class="fas fa-save fa-fw me-2"></i>Submit</button>
+                  </div>
+                </div>
+              </div>
+   </div>
