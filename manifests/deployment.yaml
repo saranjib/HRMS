@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs
+  labels:
+    app: nodejs
+    kubernetes.azure.com/generator: devhub
+  namespace: namespace-workflow-1729311143510
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+        - name: nodejs
+          image: acrworkflow1729311143510.azurecr.io/image-workflow-1729311143510:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
